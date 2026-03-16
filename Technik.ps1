@@ -37,8 +37,7 @@ function Show-MainMenu {
 0 - Install Dell Update & Netframwork 
 1 - Rename Computer
 2 - Install Office 64-bit de-de
-3 - Remove Windows Update target release version
-4 - Exit
+3 - Exit
 '@
     Write-Host $menu -ForegroundColor Cyan
 }
@@ -46,7 +45,8 @@ function Show-MainMenu {
 # Ensure script is running as admin
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     Write-Host "The script is not running as an administrator. Attempting to elevate privileges..." -ForegroundColor Yellow
-    Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    $scriptUrl = "https://raw.githubusercontent.com/WolfgangHasler/Technik/main/Technik.ps1"
+    Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `"iwr -useb '$scriptUrl' | iex`"" -Verb RunAs
     exit
 }
 
@@ -196,7 +196,7 @@ function Wait-AfterInfo {
 # Main Menu Loop
 while ($true) {
     Show-MainMenu
-    $choice = Read-Host "Select an option (0-4)"
+    $choice = Read-Host "Select an option (0-3)"
 
     switch ($choice) {
         "0" {
@@ -205,7 +205,7 @@ while ($true) {
 
         }
         "1" {
-            Rename-PCNames
+            Rename-PCName
             Wait-AfterInfo
         }
         "2" {
@@ -213,11 +213,6 @@ while ($true) {
             Wait-AfterInfo
         }
         "3" {
-            Remove-WUTargetRelease
-            Wait-AfterInfo
-        
-        }
-        "4" {
             Write-Host "Exiting..." -ForegroundColor Yellow
             exit
         }
