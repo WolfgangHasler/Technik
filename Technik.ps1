@@ -82,7 +82,8 @@ function Install-DellUpdate {
         -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36" `
         -o $installerPath $downloadUrl 2>$null
     
-    $size = (Get-Item $installerPath -ErrorAction SilentlyContinue)?.Length
+    $item = Get-Item $installerPath -ErrorAction SilentlyContinue
+    $size = if ($item) { $item.Length } else { 0 }
     if (-not $size -or $size -lt 1MB) {
         Write-Host "Download fehlgeschlagen (Datei fehlt oder zu klein)!" -ForegroundColor Red
         Read-Host "Press Enter to return to main menu"
