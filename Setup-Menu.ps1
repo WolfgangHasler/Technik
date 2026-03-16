@@ -7,14 +7,12 @@
 #>
 
 # ── Admin-Check ────────────────────────────────────────────────────────────────
-if (-NOT ([Security.Principal.WindowsPrincipal]
-         [Security.Principal.WindowsIdentity]::GetCurrent()
-         ).IsInRole([Security.Principal.WindowsBuiltInRole]"Administrator")) {
-
+$currentUser = [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
+$isAdmin = $currentUser.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+if (-NOT $isAdmin) {
     Write-Host "Starte als Administrator neu..." -ForegroundColor Yellow
     $scriptUrl = "https://raw.githubusercontent.com/WolfgangHasler/Technik/main/Setup-Menu.ps1"
-    Start-Process PowerShell -Verb RunAs `
-        -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `"iwr -useb '$scriptUrl' | iex`""
+    Start-Process PowerShell -Verb RunAs -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `"iwr -useb '$scriptUrl' | iex`""
     exit
 }
 
