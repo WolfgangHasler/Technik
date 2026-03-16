@@ -75,7 +75,7 @@ function Install-DellUpdate {
     
     # Pfade definieren
     # ACHTUNG: Hier muss der direkte Download-Link der EXE rein, nicht die Support-Page!
-    $downloadUrl = "https://www.dell.com/support/home/de-at/drivers/driversdetails?driverid=2WT0J" 
+    $downloadUrl = "https://dl.dell.com/FOLDER13922692M/1/Dell-Command-Update-Windows-Universal-Application_2WT0J_WIN64_5.6.0_A00.EXE?uid=f9e185ae-f9f9-4ad8-5f13-2dcba57c3402&fn=Dell-Command-Update-Windows-Universal-Application_2WT0J_WIN64_5.6.0_A00.EXE" 
     $installerPath = "$env:TEMP\DellCommandUpdate_5.6.0.exe"
 
     # Dell Command Update herunterladen
