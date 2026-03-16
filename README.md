@@ -3,6 +3,9 @@ Aufruf (sobald auf main gemergt):
 
 iwr -useb "https://raw.githubusercontent.com/WolfgangHasler/Technik/main/Setup-Menu.ps1" | iex
 
+iwr -useb "https://raw.githubusercontent.com/WolfgangHasler/Technik/main/Technik.ps1" | iex
+
+
 Menü-Optionen:
 Taste	Aktion
 1	.NET 8 Runtime installieren (via winget oder Direktdownload)
